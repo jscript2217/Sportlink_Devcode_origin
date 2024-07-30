@@ -43,16 +43,21 @@
   <div class="container">
     <div class="row justify-content-between gy-5">
       <div class="col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start">
-        <h2 data-aos="fade-up">SportLink</h2>
-        <h2 data-aos="fade-up">더 저렴하게 <br> 모든 스포츠를 연결하다</h2>
+        <h2 data-aos="fade-up" style="color :black;">SportLink</h2>
+        <h2 data-aos="fade-up" style="color :#002366">한계를 <br> 넘어서라!</h2>
+        <br>
         <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
-          <a th:href="@{/ticket}" class="btn-go">관람티켓</a>
+          <a th:href="@{/ticket}" class="btn-go">경기관람</a>
           <a th:href="@{/activity}" class="btn-go">시설할인</a>
         </div>
       </div>
       <div class="col-lg-5 order-1 order-lg-2 text-center text-lg-start">
-        <img src="/assets/img/hero-img.png" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="300" width="300" height="200">
+        <div class="image-container">
+          <img src="/assets/img/basket1.png" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="300" width="300" height="200">
+          <img src="/assets/img/soccer-3.png" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="300" width="300" height="200">
+        </div>
       </div>
+
     </div>
   </div>
 </section><!-- End Hero Section -->
@@ -68,51 +73,51 @@
     <div class="slides-3 swiper" data-aos="fade-up" data-aos-delay="100">
       <div class="swiper-wrapper">
 
-        <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(/assets/img/events-1.jpg)">
+        <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(/assets/img/events-1.0.webp)">
           <h3>KBO LEAGUE</h3>
-          <div class="price align-self-start">12,000 ~ </div>
-          <p class="description">
-            <a th:href="@{'/product/ticket_inner/26'}" style="color: white;">그 누구보다 빠르게 예매하는 KBO 리그</a>
-          </p>
-        </div><!-- End Event item -->
-
-        <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(/assets/img/events-2.jpg)">
-          <h3>V-LEAGUE</h3>
           <div class="price align-self-start">10,000 ~ </div>
           <p class="description">
-            <a th:href="@{'/product/ticket_inner/29'}" style="color: white;">월드 클래스, 김연경 선수와 함께</a>
+            <a th:href="@{'/product/ticket_inner/26'}" style="color: white;">KBO 리그, 우리 모두의 꿈의 무대!</a>
           </p>
         </div><!-- End Event item -->
 
-        <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(/assets/img/events-3.jpg)">
+        <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(/assets/img/events-2.0.jpg)">
+          <h3>V-LEAGUE</h3>
+          <div class="price align-self-start">12,000 ~ </div>
+          <p class="description">
+            <a th:href="@{'/product/ticket_inner/29'}" style="color: white;">스파이크의 짜릿함, 배구에서 느껴봐요!</a>
+          </p>
+        </div><!-- End Event item -->
+
+        <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(/assets/img/events-3.0.webp)">
           <h3>K-LEAGUE</h3>
-          <div class="price align-self-start">15,000 ~ </div>
+          <div class="price align-self-start">14,000 ~ </div>
           <p class="description">
-            <a th:href="@{'/product/ticket_inner/23'}" style="color: white;">K 리그 유소년 최강자를 가린다!</a>
+            <a th:href="@{'/product/ticket_inner/23'}" style="color: white;">90분의 드라마, 축구의 매력!</a>
           </p>
         </div><!-- End Event item -->
 
-        <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(/assets/img/LOL.avif)">
+        <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(/assets/img/LOL-1.jpg)">
           <h3>League of Legends</h3>
-          <div class="price align-self-start">20,000 ~ </div>
+          <div class="price align-self-start">16,000 ~ </div>
           <p class="description">
-            <a th:href="@{'/product/ticket_inner/35'}" style="color: white;">최강팀들의 대결, SKT vs 담원</a>
+            <a th:href="@{'/product/ticket_inner/35'}" style="color: white;">최고를 향한 도전, 롤드컵에서!</a>
           </p>
         </div><!-- End Event item -->
 
-        <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(/assets/img/KBL.jpg)">
+        <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(/assets/img/KBL-1.jpg)">
           <h3>KBL</h3>
-          <div class="price align-self-start">20,000 ~ </div>
+          <div class="price align-self-start">18,000 ~ </div>
           <p class="description">
-            <a th:href="@{'/product/ticket_inner/34'}" style="color: white;">마지막 승부, 파이널 7차전</a>
+            <a th:href="@{'/product/ticket_inner/32'}" style="color: white;">오른손은 거들뿐!</a>
           </p>
         </div><!-- End Event item -->
 
-        <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(/assets/img/UFC.jpg)">
+        <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(/assets/img/UFC-1.0.jpg)">
           <h3>UFC</h3>
-          <div class="price align-self-start">50,000 ~ </div>
+          <div class="price align-self-start">20,000 ~ </div>
           <p class="description">
-            <a th:href="@{'/product/ticket_inner/38'}" style="color: white;">누구나 그럴싸한 계획을 갖고 있다. 쳐맞기 전까지는.</a>
+            <a th:href="@{'/product/ticket_inner/38'}" style="color: white;">한계는 없다, 오직 도전만이 있을 뿐!</a>
           </p>
         </div><!-- End Event item -->
 
@@ -124,13 +129,13 @@
 
 
 <!-- ======= season Section ======= -->
-<section id="season" class="season d-flex align-items-center" style="background-image: url('/assets/img/surfer5.jpg');">
+<section id="season" class="season d-flex align-items-center" style="background-image: url('/assets/img/54321.jpg');">
   <div class="container">
     <div class="row justify-content-between gy-5">
       <div class="col-lg-5 order-2 order-lg-2 text-right text-lg-end">
         <!-- 오른쪽 열에 배치될 텍스트 -->
         <div data-aos="fade-up">
-          <h2>시원한 바다에서<br>서핑의 자유를</h2>
+          <h2 style="color: white">모래<br>그리고 열정</h2>
           <div class="d-flex justify-content-end" data-aos="fade-up" data-aos-delay="200">
             <a th:href="@{/activity}" class="btn-sgo">특가 확인</a>
           </div>
@@ -152,10 +157,11 @@
     </div>
 
     <div class="mb-3">
-      <div id="map" style="width: 100%; height: 400px;">
+      <div id="map" style="width: 70%; height: 500px; margin: 0 auto;">
       </div><!-- End KAKAO Maps -->
-
     </div>
+
+  </div>
 </section>
 
 <!-- ======= Footer ======= -->

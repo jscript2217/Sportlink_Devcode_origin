@@ -85,7 +85,7 @@ h6 {
   border-radius: 50px;
   transition: 0.5s;
   color: #fff;
-  background: var(--color-primary);
+  background: #002366;
   box-shadow: 0 8px 28px rgba(42, 11, 105, 0.31);
   text-decoration: none; /* a 태그의 밑줄 제거 */
 
@@ -199,7 +199,7 @@ section {
   right: 15px;
   bottom: 15px;
   z-index: 99999;
-  background: var(--color-primary);
+  background: #002366;
   width: 44px;
   height: 44px;
   border-radius: 50px;
@@ -572,7 +572,7 @@ section {
 }
 
 .events .swiper-pagination .swiper-pagination-bullet-active {
-  background-color: var(--color-primary);
+  background-color: #002366;
 }
 
 /*--------------------------------------------------------------
@@ -617,9 +617,14 @@ section {
   border-radius: 50px;
   transition: 0.5s;
   color: #fff;
-  background: var(--color-primary);
+  background: #002366;
   box-shadow: 0 8px 28px rgba(42, 11, 105, 0.31);
   text-decoration: none; /* a 태그의 밑줄 제거 */
+}
+
+.image-container {
+    display: flex;
+    justify-content: space-between;
 }
 
 

@@ -52,14 +52,14 @@
 .header .logo h1 {
   font-size: 28px;
   font-weight: 700;
-  color: #000;
+  color: black;
   margin: 0;
   font-family: var(--font-secondary);
 }
 
 
 .header .logo h1 span {
-  color: var(--color-primary);
+  color: #002366;
 }
 
 .header .logo h1 a {
@@ -67,3 +67,8 @@
   color: inherit; /* a 태그의 기본 색상을 상속 */
 }
 
+.weatherInfo {
+ margin-left : 50px;
+ font-weight : 600;
+ font-size : 15px;
+}

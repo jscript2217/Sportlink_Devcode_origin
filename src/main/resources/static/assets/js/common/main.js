@@ -213,7 +213,6 @@
                 // 받아온 정보들을 표현한다.
                 const weatherIconHTML = `<img src="${weatherIconAdrs}" alt="Weather Icon" style="display: inline-block; vertical-align: middle;">`;
                 const temperatureHTML = `<span style="display: inline-block; vertical-align: middle; margin-right: 20px;">${temperature} °C</span>`;
-                const weatherDescriptionHTML = `<span style="display: inline-block; vertical-align: middle; margin-left: 20px;">${weatherDescription}</span>`;
                 weatherInfo.innerHTML = `${weatherIconHTML}${temperatureHTML}`;
             })
             .catch((error) => console.log("error:", error));
@@ -224,25 +223,25 @@
         switch (description) {
             case "clear sky":
                 return "맑음";
-            case "few clouds":
-                return "구름 조금";
-            case "scattered clouds":
+           case "few clouds":
+               return "구름 조금";
+           case "scattered clouds":
                 return "구름 많음";
             case "broken clouds":
                 return "구름 낌";
-            case "shower rain":
+           case "shower rain":
                 return "소나기";
             case "rain":
                 return "비";
             case "thunderstorm":
-                return "천둥 번개";
-            case "snow":
-                return "눈";
-            case "mist":
+               return "천둥 번개";
+          case "snow":
+               return "눈";
+           case "mist":
                 return "안개";
             default:
                 return description;
-        }
+       }
     }
     init();
 })();
