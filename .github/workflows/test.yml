@@ -3,7 +3,7 @@ name: Simple Test Workflow
 on:
   push:
     branches:
-      - update
+      - main
 
 jobs:
   test:
