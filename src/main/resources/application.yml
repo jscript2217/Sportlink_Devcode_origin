@@ -10,9 +10,9 @@ spring:
     #
     #    username: stagerds
     #    password: )?SYa{SLj7laTxzK#5bP8wg$JhLs
-    url: jdbc:mysql://${DB_HOST}:3306/stagedb
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    url: jdbc:mysql://localhost:3306/test
+    username: root
+    password: 1234
 
   thymeleaf:
     prefix: classpath:/templates/
