@@ -42,11 +42,22 @@ spring:
         auto: false
       s3:
         bucket: ${S3_BUCKET}
+      credentials:
+        accessKey: ${AWS_ACCESS_KEY_ID}
+        secretKey: ${AWS_SECRET_ACCESS_KEY}
+      secretsmanager:
+        name: apikeys
   ##key추가
   file:
     upload:
       directory: src/main/resources/static/image/
+  kakao:
+    client_id: ${kakao_client_id}
+    redirect_uri: ${kakao_redirect_uri}
 
+  naver:
+    client_id: ${naver_client_id}
+    client_secret: ${naver_client_secret}
 
   spring:
     servlet:
