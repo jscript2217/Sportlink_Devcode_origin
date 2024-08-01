@@ -78,7 +78,7 @@ jobs:
       - name: Image Tag Change                                       # Clone 된 Helm Chart Repo Image Tag 변경
         uses: mikefarah/yq@v4.9.6                                    # mikefarah/yq@v4.9.6 Action 사용
         with:                                                        # values.yaml -> ".image.tag"를 찾아 변경 된 Tag로 Replace
-          cmd: yq e --inplace '.image.tag = "${{ env.IMAGE_TAG }}"' /sportslink/values.yaml
+          cmd: yq e --inplace '.image.tag = "${{ env.IMAGE_TAG }}"' sportslink/values.yaml
       
       - name: Create Pull Request                                    # Helm Chart Repo Pull Request 생성 
         uses: peter-evans/create-pull-request@v3                     # peter-evans/create-pull-request Action 사용
