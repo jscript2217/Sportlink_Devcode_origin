@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>SportLink - 문의하기</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/assets/vendor/aos/aos.css" rel="stylesheet">
+
+  <!-- Custom CSS File -->
+  <link href="/assets/css/qna/qna_inner.css" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<div th:replace="layout/header :: header"></div>
+<!-- End Header -->
+
+<!-- Inquiry Detail Section -->
+<section id="inquiry-detail" class="inquiry-detail">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <div class="inquiry-detail-content">
+                    <h2>문의사항</h2>
+                    <p>문의하신 내용입니다.</p>
+                    <div class="inq-form-group">
+                        <p id="inquirysubject" th:text="'제목: ' + ${inquiry.title}"></p>
+                        <p id="inquiryName" th:text="'작성자: ' + ${inquiry.author}"></p>
+                        <p id="inquiryDate" th:text="'작성 날짜: ' + ${inquiry.date}"></p>
+                        <p id="inquiryMessage" th:text="'작성 내용: ' + ${inquiry.content}"></p>
+                    </div>
+                    <div class="edit-delete-form">
+                        <form th:action="@{/editInquiry/{id}(id=${inquiry.id})}" method="get" class="edit-button">
+                            <button type="submit">수정</button>
+                        </form>
+                        <form th:action="@{/deleteInquiry}" method="post" class="delete-button">
+                            <input type="hidden" name="id" th:value="${inquiry.id}" />
+                            <button type="submit" onclick="return confirm('정말로 이 문의사항을 삭제하시겠습니까?')">삭제</button>
+                        </form>
+                    </div>
+                 </div>
+
+        <!-- Comments Section -->
+        <div class="comments-section">
+          <h2>댓글</h2>
+          <div class="comment" th:each="comment : ${comments}">
+            <p><strong th:text="${comment.author}"></strong> <span th:text="${comment.createdAt}"></span></p>
+            <p th:text="${comment.content}"></p>
+              <!-- 댓글 삭제 버튼 -->
+              <form th:if="${session.role == 'admin'}" th:action="@{/deleteComment}" method="post">
+                  <input type="hidden" name="commentId" th:value="${comment.id}" />
+                  <button type="submit" class="comment submit">삭제</button>
+              </form>
+          </div>
+        </div>
+
+        <!-- Comment Form -->
+        <div th:if="${session.role == 'admin'}" class="comment-form">
+<!--    <div class="comment-form" th:if="${isAdmin}"> 관리자만 댓글 달기 폼 보이도록 하는 코드-->
+          <h2>댓글 작성</h2>
+          <form action="#" th:action="@{/addComment}" th:object="${newComment}" method="post">
+            <input type="hidden" name="inquiryId" th:value="${inquiry.id}" />
+            <div class="form-group">
+              <input type="hidden" th:value="Admin" th:field="*{author}" />
+<!--              // 댓글 작성시 'Admin' 자동출력 //-->
+            </div>
+            <div class="form-group">
+              <label for="commentContent">내용</label>
+              <textarea class="form-control" id="commentContent" th:field="*{content}" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">댓글 달기</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<div id="preloader"></div>
+
+<!-- ======= Footer ======= -->
+<div th:replace="layout/footer :: footer"></div>
+
+
+<!-- Vendor JS Files -->
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/aos/aos.js"></script>
+<script src="/assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+<script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+<!-- Template Main JS File -->
+<script src="/assets/js/common/main.js"></script>
+
+</body>
+
+</html>

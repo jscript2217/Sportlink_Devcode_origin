@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>SportLink - 내정보</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+
+    <!-- Custom CSS File -->
+    <link href="/assets/css/qna/qna_write.css" rel="stylesheet">
+</head>
+
+<body>
+<th:block th:if="${msg}">
+    <script>
+        top.alert("[[${msg}]]");
+    </script>
+</th:block>
+<!-- ======= Header ======= -->
+<div th:replace="layout/header :: header"></div>
+<!-- End Header -->
+
+<!-- ======= 문의하기 Section ======= -->
+<!--<form action="/member_info_edit" method="post">-->
+<form th:action="@{'/member_info_edit/' + ${member.userid}}" method="post">
+<section id="contact" class="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <div class="contact-form">
+                    <h2>내정보</h2>
+                    <p><strong>아이디:</strong> <span th:text="${member.userid}"></span></p>
+                    <p><strong>이름:</strong> <span th:text="${member.username}"></span></p>
+                    <p><strong>이메일:</strong> <span th:text="${member.email}"></span></p>
+                    <p><strong>전화번호</strong><input th:value="${member.getMobile()}" oninput="oninputPhone(this)" maxlength="13" class="form-control" name="mobile" id="mobile" placeholder="전화번호" required></p>
+                    <p th:if="${session.role == 'admin'}"><strong>권한:</strong> <span th:text="${member.role}"></span></p>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary" id="edit-button" style="background-color: #8831cf;">수정하기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- End 문의하기 Section -->
+</form>
+
+<a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<div id="preloader"></div>
+
+<!-- ======= Footer ======= -->
+<div th:replace="layout/footer :: footer"></div>
+
+<!-- Script to load header -->
+<script src="/assets/js/common/header.js"></script>
+<script src="/assets/js/common/footer.js"></script>
+
+<!-- Vendor JS Files -->
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/aos/aos.js"></script>
+<script src="/assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+<script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+<!-- Template Main JS File -->
+<script src="/assets/js/common/main.js"></script>
+<script src="/assets/js/user/member_info.js"></script>
+
+
+</body>
+
+</html>

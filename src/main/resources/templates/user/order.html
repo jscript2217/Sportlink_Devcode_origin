@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>SportLink - 주문 내역</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/assets/vendor/aos/aos.css" rel="stylesheet">
+
+  <!-- Template CSS File -->
+  <link href="/assets/css/user/order.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <div th:replace="layout/header :: header"></div>
+  <!-- End Header -->
+
+<!-- ======= Order History Section ======= -->
+<section id="order-history" class="order-history">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 offset-lg-2">
+        <div class="order-history-content">
+          <h2>주문 내역</h2>
+          <div id="orderHistoryContent">
+            <table class="table">
+              <thead>
+              <tr>
+                <th>주문 번호</th>
+                <th>상품</th>
+                <th>가격</th>
+                <th>수량</th>
+                <th>주문 날짜</th>
+                <th>총 주문 가격</th>
+                <th>              </th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr th:each="order : ${orderHistory}">
+                <td th:text="${order.orderNo}"></td>
+                <td>
+                  <a th:href="@{'/ticket/go_ticket/order/' + ${order.product}}">
+                    <span th:text="${order.product_id}"></span>
+                  </a>
+                </td>
+                <td th:text="${#numbers.formatDecimal(order.product_price, 0, 'COMMA', 0, 'POINT')} + '원'" class="line"></td>
+                <td th:text="${order.quantity}"></td>
+                <td th:text="${order.date}" class="line"></td>
+                <td th:text="${#numbers.formatDecimal((order.product_price * order.quantity), 0, 'COMMA', 0, 'POINT')} + '원'"></td>
+                <td class="button-cell">
+                  <a th:href="@{qna/new/{product}(product=${order.product_id})}" class="btn btn-primary button-cell btn-sm">문의하기</a>
+                </td>
+                <td class="button-cell">
+                <form th:action="@{'/order/delete/' + ${order.orderNo}}" method="post">
+                  <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('정말로 삭제하시겠습니까?')">삭제</button>
+                </form>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Order History Section -->
+
+    <!-- ======= Footer ======= -->
+  <div th:replace="layout/footer :: footer"></div>
+
+  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/assets/vendor/aos/aos.js"></script>
+  <script src="/assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="/assets/js/common/main.js"></script>
+
+  
+  </body>
+  </html>

@@ -1,0 +1,69 @@
+/* Fonts */
+:root {
+  --font-default: "Noto Sans KR", sans-serif;
+  --font-primary: "Noto Sans KR", sans-serif;
+  --font-secondary: "Noto Sans KR", sans-serif;
+}
+
+/* Colors */
+:root {
+  --color-default: #212529;
+  --color-primary: #8831cf;
+  --color-secondary: #37373f;
+}
+
+/* Smooth scroll behavior */
+:root {
+  scroll-behavior: smooth;
+}
+
+
+/*--------------------------------------------------------------
+# Header
+--------------------------------------------------------------*/
+.header {
+  background: #fff;
+  transition: all 0.5s;
+  z-index: 997;
+  height: 90px;
+}
+
+.header.sticked {
+  border-color: #fff;
+  border-color: #eee;
+}
+
+.header .logo img {
+  max-height: 40px;
+  margin-right: 6px;
+}
+
+.header .logo h1 a:hover,
+.header .logo h1 a:focus,
+.header .logo h1 a:active {
+  text-decoration: none; /* 모든 상태에서 밑줄 제거 */
+}
+
+.header .logo {
+  text-decoration: none;
+  color: inherit;
+}
+
+.header .logo h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #000;
+  margin: 0;
+  font-family: var(--font-secondary);
+}
+
+
+.header .logo h1 span {
+  color: var(--color-primary);
+}
+
+.header .logo h1 a {
+  text-decoration: none; /* a 태그의 밑줄 제거 */
+  color: inherit; /* a 태그의 기본 색상을 상속 */
+}
+
