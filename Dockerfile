@@ -8,4 +8,5 @@ COPY . /home/gradle/project
 WORKDIR /home/gradle/project
 
 # 프로젝트를 빌드
-RUN gradle build --no-daemon -Dorg.gradle.vfs.watch=false -x test --info
+RUN gradle build -x test
+
