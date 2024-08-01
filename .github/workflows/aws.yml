@@ -2,7 +2,7 @@ name: AWS ECR Push & Helm Chart Update
 
 on:
   push:
-    branches: [ "update" ]
+    branches: [ "main" ]
 
 env:
   AWS_REGION: ap-northeast-2                   # set this to your preferred AWS region, e.g. us-west-1
@@ -15,7 +15,7 @@ jobs:
   # WorkFlow Job 영역 ( 실제 수행 작업 정의 )
   build:                                                             # Build Job 영역 시작
     name: Image-Build                                                # 이름 지정
-    runs-on: ubuntu-latest                                     # Runner 지정 ( Job-Container )
+    runs-on: ubuntu-latest                                           # Runner 지정 ( Job-Container )
     environment: production                                          # Job 식별 환경변수
 
     # AWS ECR Repository Push
@@ -45,7 +45,7 @@ jobs:
       id: build-image                                                # Image Build 및 Tagging / ECR Push 작업 식별 ID 정의
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}        # ECR Login 작업 결과에서 Registry 정보를 가져와 ECR_REGISTRY 환경변수로 등록
-        ECR_REPOSITORY: sportslink                                   # ECR Repository 정보를 환경변수로 등록
+        ECR_REPOSITORY: sportlink-ecr                                   # ECR Repository 정보를 환경변수로 등록
         IMAGE_TAG: ${{ steps.tag-image.outputs.version }}            # IMAGE_TAG 환경변수에 tag-image 작업에서 정의한 값을 등록
       run: |
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .   # Container Image Build 
@@ -78,7 +78,7 @@ jobs:
       - name: Image Tag Change                                       # Clone 된 Helm Chart Repo Image Tag 변경
         uses: mikefarah/yq@v4.9.6                                    # mikefarah/yq@v4.9.6 Action 사용
         with:                                                        # values.yaml -> ".image.tag"를 찾아 변경 된 Tag로 Replace
-          cmd: yq e --inplace '.image.tag = "${{ env.IMAGE_TAG }}"' values.yaml
+          cmd: yq e --inplace '.image.tag = "${{ env.IMAGE_TAG }}"' /sportslink/values.yaml
       
       - name: Create Pull Request                                    # Helm Chart Repo Pull Request 생성 
         uses: peter-evans/create-pull-request@v3                     # peter-evans/create-pull-request Action 사용
