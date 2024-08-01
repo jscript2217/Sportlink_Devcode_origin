@@ -28,7 +28,7 @@ name: devtest
 
 on:
   push:
-    branches: [ "update" ]
+    branches: [ "main" ]
 
 jobs:
   build:
