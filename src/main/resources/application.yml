@@ -4,24 +4,23 @@ server:
 # database 연동 설정
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    #    각자 PC에 만들어놓은 Database이름을 써야 합니다.
-    url: jdbc:mysql://localhost:3306/sportslink?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    #    driver-class-name: com.mysql.cj.jdbc.Driver
+    #    #    각자 PC에 만들어놓은 Database이름을 써야 합니다.
+    #    url: jdbc:mysql://stage-rds.cj2uw6y4crk3.ap-northeast-2.rds.amazonaws.com:3306/stagedb?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    #
+    #    username: stagerds
+    #    password: )?SYa{SLj7laTxzK#5bP8wg$JhLs
+    url: jdbc:mysql://${DB_HOST}:3306/stagedb
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
 
-    #    mysql에 생성한 사용자 계정 정보를 써야 합니다.
-
-    #    생성한 사용자 계정 정보를 써야 합니다.
-
-    username: root
-    password: 1234
   thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
     cache: false
     # 404 에러 페이지를 표시하지 않게 하고, 존재하지 않는 핸들러에 대한 예외를 발생시키도록 합니다.
   mvc:
     throw-exception-if-no-handler-found=true
-  web:
-    resources:
-      add-mappings=false
 
   # spring data jpa 설정
   jpa:
@@ -31,8 +30,19 @@ spring:
     hibernate:
       ddl-auto: update
 
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
 
-
+  cloud:
+    aws:
+      region:
+        static: ap-northeast-2 # 사용할 AWS 리전
+      stack:
+        auto: false
+      s3:
+        bucket: ${S3_BUCKET}
+  ##key추가
   file:
     upload:
       directory: src/main/resources/static/image/
@@ -42,4 +52,4 @@ spring:
     servlet:
       multipart:
         max-file-size: 10MB
-        max-request-size: 10MB
+        max-request-size: 10MB=
