@@ -8,5 +8,4 @@ COPY . /home/gradle/project
 WORKDIR /home/gradle/project
 
 # 프로젝트를 빌드
-RUN gradle build -x test
-
+RUN gradle build --no-daemon -x test
