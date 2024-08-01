@@ -33,3 +33,69 @@ jobs:
       run: |
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+
+# 헬름차트 클론
+#   name: Dev-build-ECR
+
+# on:
+#   push:
+#     branches: [ "main" ]
+
+# jobs:
+#   build-and-deploy:
+#     name: Image-Build and Helm Chart Update
+#     runs-on: ubuntu-latest
+#     environment: Dev
+
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v2
+
+#       - name: Set up Docker Buildx
+#         uses: docker/setup-buildx-action@v1
+
+#       - name: Log in to Amazon ECR
+#         env:
+#           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#         run: |
+#           aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 637423456584.dkr.ecr.ap-northeast-2.amazonaws.com
+
+#       - name: Build and Push Docker Image
+#         env:
+#           ECR_REGISTRY: 637423456584.dkr.ecr.ap-northeast-2.amazonaws.com
+#           ECR_REPOSITORY: sportlink-ecr
+#           IMAGE_TAG: v1.1
+#         run: |
+#           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+#           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+#       - name: Set up environment variables for Helm Chart Update
+#         run: |
+#           echo "IMAGE_TAG=v1.1" >> $GITHUB_ENV
+#           echo "GIT_REPO=eeeeeni/Sportlink_Helm" >> $GITHUB_ENV
+#           echo "HASH=${{ github.sha }}" >> $GITHUB_ENV
+
+#       - name: Clone Deploy repository
+#         uses: actions/checkout@v2
+#         with:
+#           repository: ${{ env.GIT_REPO }}
+#           ref: 'main'
+#           token: ${{ secrets.GIT_ACCESS_TOKEN }}
+
+#       - name: Image Tag Change
+#         uses: mikefarah/yq@v4.9.6
+#         with:
+#           cmd: yq e --inplace '.image.tag = "${{ env.IMAGE_TAG }}"' Sportlink/values.yaml
+
+#       - name: Create Pull Request
+#         uses: peter-evans/create-pull-request@v3
+#         with:
+#           title: 'deploy: Sportlink-${{ env.HASH }}'
+#           token: ${{ secrets.GIT_ACCESS_TOKEN }}
+#           base: main
+#           branch: Sportlink-${{ env.HASH }}
+#           commit-message: 'deploy: Sportlink-${{ env.HASH }}'
+#           labels: |
+#             automerge
