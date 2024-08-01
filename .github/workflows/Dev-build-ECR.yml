@@ -1,12 +1,12 @@
-name: Dev_Build and Deploy for Update
+
+name: Dev-build-ECR
 
 on:
   push:
-    branches:
-      - update
+    branches: [ "main" ]
 
 jobs:
-  build-and-deploy:
+  build:
     name: Image-Build
     runs-on: ubuntu-latest
     environment: Dev
@@ -14,8 +14,6 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
@@ -31,8 +29,7 @@ jobs:
       env:
         ECR_REGISTRY: 637423456584.dkr.ecr.ap-northeast-2.amazonaws.com
         ECR_REPOSITORY: sportlink-ecr
-        IMAGE_TAG: ${{ github.sha }}
+        IMAGE_TAG: v1.1
       run: |
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-
