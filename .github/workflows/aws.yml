@@ -90,8 +90,3 @@ jobs:
           commit-message: 'deploy: sportslink-${{ env.HASH }}'           # Commit Message 지정
           labels: |                                                  # Pull Request Label 지정
             automerge
-
-      - name: Delete merged branch
-        uses: oktavilla/gh-action-auto-delete-branch@v2
-        with:
-          github_token: ${{ secrets.GIT_HUB_TOKEN }}
