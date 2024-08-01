@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
@@ -20,6 +21,11 @@ import java.util.Optional;
 public class NaverService {
     @Autowired private MemberRepository memberRepository;
     @Autowired private MemberService memberService;
+    @Value("${spring.naver.client_id}")
+    private String CLIENT_ID;
+    @Value("${spring.naver.client_secret}")
+    private String CLIENT_SECRET;
+
     private String accessToken;
     MemberDTO memberDTO = new MemberDTO();
 
@@ -94,8 +100,8 @@ public class NaverService {
     public void getAccessToken(String code) {
         String reqUrl = "https://nid.naver.com/oauth2.0/token";
         String reqParam = "grant_type=authorization_code";
-        reqParam += "&client_id=p3ROwzA2JVE8fm6AJHhi";
-        reqParam += "&client_secret=1JKnW9W0wf";
+        reqParam += "&client_id="+CLIENT_ID;
+        reqParam += "&client_secret="+CLIENT_SECRET;
         reqParam += "&code="+code;
 
         try {
