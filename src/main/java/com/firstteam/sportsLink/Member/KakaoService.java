@@ -1,16 +1,5 @@
 package com.firstteam.sportsLink.Member;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.firstteam.sportsLink.ApiKeys.ApiKeys;
-
-import jakarta.servlet.http.HttpSession;
-import lombok.extern.slf4j.Slf4j;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -20,24 +9,45 @@ import java.time.LocalDate;
 import java.util.Map;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+// import com.firstteam.sportsLink.ApiKeys.ApiKeys;
+
+import jakarta.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
+
 @Service
 @Slf4j
 public class KakaoService {
     @Autowired private MemberRepository memberRepository;
     @Autowired private MemberService memberService;
+
+    @Value("${spring.kakao.client_id}")
+    private String CLIENT_ID;
+
+    @Value("${spring.kakao.redirect_uri}")
+    private String REDIRECT_URI;
+    
     private String accessToken;
     MemberDTO memberDTO = new MemberDTO();
 
     public void getAccessToken(String code) {
         String reqUrl = "https://kauth.kakao.com/oauth/token";
         String reqParam = "grant_type=authorization_code";
-        final String CLIENT_ID=ApiKeys.getKakaoClientId();
-        final String REDIRECT_URI=ApiKeys.getKakaoRedirectUri();
+        // final String CLIENT_ID=ApiKeys.getKakaoClientId();
+        // final String REDIRECT_URI=ApiKeys.getKakaoRedirectUri();
 
         log.info("REDIRECT_URI : "+REDIRECT_URI);
         log.info("CLIENT_ID : "+CLIENT_ID);
 
+        // reqParam += "&client_id=d08e141ab68de7d1967abb180fd6727f";
         reqParam += "&client_id="+CLIENT_ID;
+        // reqParam += "&redirect_uri=http://localhost:8080/KakaoLogin";
         reqParam += "&redirect_uri="+REDIRECT_URI;
         reqParam += "&code="+code;
 
