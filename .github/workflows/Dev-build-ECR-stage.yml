@@ -94,7 +94,7 @@
 
 
 
-name: AWS ECR Push & Helm Chart Update
+name: AWS ECR Push & Helm Chart Update (Stage)
 
 on:
   push:
