@@ -36,6 +36,7 @@ public class HomeController {
     public String facility() {
         return "ticket/activity";  // facility.html 파일을 반환
     }
+
     @GetMapping("/qna")
     public String qna(HttpServletRequest request, Model model, RedirectAttributes ra) {
         HttpSession session = request.getSession();
@@ -47,6 +48,7 @@ public class HomeController {
             return "redirect:/login"; // 로그인 페이지로 리다이렉트
         }
     }
+
 
     @GetMapping("/")
     public String firstPage(Model model) {

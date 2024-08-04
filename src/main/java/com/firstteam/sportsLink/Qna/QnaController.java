@@ -1,6 +1,7 @@
-package com.firstteam.sportsLink.Qna;
+package com.firstteam.sportsLink.qna;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -83,6 +84,38 @@ public class QnaController {
         return "qna/qna_inner";
     }
 
+//    // 관리자만 댓글 달기
+//    @GetMapping("/qna_inner/{id}")
+//    public String qnainner(@PathVariable("id") Long id, Model model, HttpSession session) {
+//
+//        // 세션에서 로그인한 사용자의 정보 가져오기
+//        UserDTO user = (UserDTO) session.getAttribute("user");
+//
+//        if (user != null && user.isAdmin()) { // 관리자인 경우에만 댓글 폼을 노출
+//            model.addAttribute("isAdmin", true);
+//        }
+//
+//        if (id == null) {
+//            // id가 null이면 404 오류 반환
+//            return "error/404";
+//        }
+//
+//        QnaDTO inquiry = qnaService.getInquiryById(id);
+//        if (inquiry == null) {
+//            // 해당 ID에 대한 문의사항이 없으면 404 오류 반환
+//            return "error/404";
+//        }
+//
+//        // 문의사항과 댓글을 모델에 추가하여 페이지 반환
+//        List<CommentDTO> comments = commentService.getCommentsByInquiryId(id);
+//        model.addAttribute("inquiry", inquiry);
+//        model.addAttribute("comments", comments);
+//        model.addAttribute("newComment", new CommentDTO());
+//        model.addAttribute("isAdmin", true);
+//
+//        return "qna/qna_inner";
+//    }
+
 
     @GetMapping("/editInquiry/{id}")
     public String editInquiryPage(@PathVariable("id") Long id, Model model) {
@@ -124,7 +157,7 @@ public class QnaController {
     @PostMapping("/deleteComment")
     public String deleteComment(@RequestParam("commentId") Long commentId) {
         commentService.deleteComment(commentId);
-        return "redirect:/qna-list"; // 댓글이 삭제된 후 리다이렉트할 경로
+        return "redirect:/qna"; // 댓글이 삭제된 후 리다이렉트할 경로
     }
 }
 

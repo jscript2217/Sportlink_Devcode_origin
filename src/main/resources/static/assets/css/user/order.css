@@ -60,9 +60,8 @@
   # Order History Section
   --------------------------------------------------------------*/
   .order-history {
-    margin-top: 150px; /* 헤더 아래로 위치 조정 */
-    padding: 80px; /* 추가적인 패딩 설정 */
-    margin-bottom: 50px; /* 하단 여백 추가 */
+    padding-top: 150px; 
+    padding-bottom: 150px;
   }
 
   #orderHistoryContent {
@@ -70,7 +69,7 @@
   }
   
   .order-history-content {
-    background-color: #f9f9f9;
+    background: #fff;
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
@@ -78,16 +77,14 @@
   }
   
   .order-history-content h2 {
-    font-size: 36px;
-    font-weight: 600;
-    color: #000;
-    margin-bottom: 30px;
+    font-size: 32px;
+    margin-bottom: 20px;
   }
 
 
   .order-history-content p {
     font-size: 18px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
   }
   
   .order-item {

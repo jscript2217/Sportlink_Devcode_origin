@@ -17,6 +17,8 @@ import java.util.List;
 
 @Controller
 public class ProductController {
+    @Autowired
+    private S3Service s3Service;
 
     @Autowired
     private ProductService productService;
@@ -37,49 +39,60 @@ public class ProductController {
         return "product/activity_write";
     }
 
-    @PostMapping("/product/ticket_write")
-    public String createProduct(@ModelAttribute ProductDTO productDTO, @RequestParam("image") MultipartFile file) {
-        if (!file.isEmpty()) {
-            try {
-                String fileName = StringUtils.cleanPath(file.getOriginalFilename()); // 파일명 정리
-                Path uploadPath = Paths.get(uploadDirectory); // 업로드 디렉토리 경로
-                Path filePath = uploadPath.resolve(fileName); // 파일 경로 설정
-                Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING); // 파일 복사
 
-                // 파일 경로를 DTO에 설정
-                productDTO.setImageUrl("/image/" + fileName);
-            } catch (IOException e) {
-                e.printStackTrace();
-                // 파일 업로드에 실패한 경우 예외 처리
-                return "redirect:/product/ticket_write?uploadError";
+    @PostMapping("/product/ticket_write")
+    public String createProduct(@ModelAttribute ProductDTO productDTO, @RequestParam("image") MultipartFile file, Model model) {
+        try {
+            if (!file.isEmpty()) {
+                String imageUrl = s3Service.uploadFile(file);
+                productDTO.setImageUrl(imageUrl);
             }
+            ProductEntity product = productDTO.toEntity();
+            productService.saveProduct(product);
+            return "redirect:/ticket";
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "redirect:/product/ticket_write?uploadError";
         }
-        ProductEntity product = productDTO.toEntity();
-        productService.saveProduct(product);
-        return "redirect:/ticket";
     }
 
     @PostMapping("/product/activity_write")
-    public String createActivity(@ModelAttribute ProductDTO productDTO, @RequestParam("image") MultipartFile file) {
-        if (!file.isEmpty()) {
-            try {
-                String fileName = StringUtils.cleanPath(file.getOriginalFilename()); // 파일명 정리
-                Path uploadPath = Paths.get(uploadDirectory); // 업로드 디렉토리 경로
-                Path filePath = uploadPath.resolve(fileName); // 파일 경로 설정
-                Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING); // 파일 복사
-
-                // 파일 경로를 DTO에 설정
-                productDTO.setImageUrl("/image/" + fileName);
-            } catch (IOException e) {
-                e.printStackTrace();
-                // 파일 업로드에 실패한 경우 예외 처리
-                return "redirect:/ticket/ticket_write?uploadError";
+    public String createActivity(@ModelAttribute ProductDTO productDTO, @RequestParam("image") MultipartFile file, Model model) {
+        try {
+            if (!file.isEmpty()) {
+                String imageUrl = s3Service.uploadFile(file);
+                productDTO.setImageUrl(imageUrl);
             }
+            ProductEntity product = productDTO.toEntity();
+            productService.saveProduct(product);
+            return "redirect:/ticket";
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "redirect:/product/ticket_write?uploadError";
         }
-        ProductEntity product = productDTO.toEntity();
-        productService.saveProduct(product);
-        return "redirect:/activity";
     }
+
+//    @PostMapping("/product/activity_write")
+//    public String createActivity(@ModelAttribute ProductDTO productDTO, @RequestParam("image") MultipartFile file) {
+//        if (!file.isEmpty()) {
+//            try {
+//                String fileName = StringUtils.cleanPath(file.getOriginalFilename()); // 파일명 정리
+//                Path uploadPath = Paths.get(uploadDirectory); // 업로드 디렉토리 경로
+//                Path filePath = uploadPath.resolve(fileName); // 파일 경로 설정
+//                Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING); // 파일 복사
+//
+//                // 파일 경로를 DTO에 설정
+//                productDTO.setImageUrl("/image/" + fileName);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//                // 파일 업로드에 실패한 경우 예외 처리
+//                return "redirect:ticket/ticket_write?uploadError";
+//            }
+//        }
+//        ProductEntity product = productDTO.toEntity();
+//        productService.saveProduct(product);
+//        return "redirect:/activity";
+//    }
 
 // 백엔드에서 페이징 구현하려고 했지만,,, 필터가 해당 페이지만 적용되는 바람에 다시 만듬
 //    @GetMapping("/ticket")
@@ -168,16 +181,22 @@ public class ProductController {
                 // 파일 업로드에 실패한 경우 예외 처리
                 // 적절한 방법으로 처리하거나 사용자에게 알리는 메시지를 반환
                 // 여기서는 간단히 로그 출력 후 리다이렉트
-                return "redirect:/product/ticket_write?uploadError";
+                return "redirect:product/ticket_write?uploadError";
             }
         }
         productService.updateProduct(id, product);
-        return "redirect:/product/ticket_inner/" + id;
+        return "redirect:product/ticket_inner/" + id;
     }
     // 삭제 기능 추가
     @PostMapping("/product/delete/{id}")
     public String deleteProduct(@PathVariable("id") Long id) {
-        productService.deleteProductById(id);
-        return "redirect:/ticket";
+        try {
+            productService.deleteProductById(id);
+        } catch (Exception e) {
+            // 예외 발생 시 로그를 기록하거나 처리
+            e.printStackTrace();
+            return "redirect:/ticket"; // 오류 발생 시 리디렉션할 URL
+        }
+        return "redirect:/ticket"; // 정상 처리 시 리디렉션할 URL
     }
 }
