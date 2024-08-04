@@ -10,13 +10,9 @@ spring:
     #
     #    username: stagerds
     #    password: )?SYa{SLj7laTxzK#5bP8wg$JhLs
-    # url: jdbc:mysql://${DB_HOST}:3306/${DB_NAME}
-    # username: ${DB_USERNAME}
-    # password: ${DB_PASSWORD}
-
-    url: jdbc:mysql://localhost:3306/test
-    username: root
-    password: 1234
+    url: jdbc:mysql://${DB_HOST}:3306/${DB_NAME}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
 
   thymeleaf:
     prefix: classpath:/templates/
@@ -40,13 +36,12 @@ spring:
 
   cloud:
     aws:
-      region: ${AWS_REGION} # 사용할 AWS 리전
-      access_key_id: ${AWS_ACCESS_KEY_ID}
-      secret_access_key: ${AWS_SECRET_ACCESS_KEY}
-    stack:
-      auto: false
-    s3:
-      bucket: ${S3_BUCKET}
+      region:
+        static: ap-northeast-2 # 사용할 AWS 리전
+      stack:
+        auto: false
+      s3:
+        bucket: ${S3_BUCKET}
   ##key추가
   file:
     upload:
@@ -64,4 +59,3 @@ api:
     kakao_redirect_uri: ${kakao_redirect_uri}
     naver_client_id: ${naver_client_id}
     naver_client_secret: ${naver_client_secret}
-
