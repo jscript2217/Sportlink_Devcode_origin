@@ -3,7 +3,10 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
@@ -21,6 +24,12 @@ public class NaverService {
     @Autowired private MemberRepository memberRepository;
     @Autowired private MemberService memberService;
     private String accessToken;
+
+    @Value("${api.keys.naver_client_id}")
+    private String CLIENT_ID;
+
+    @Value("${api.keys.naver_client_secret}")
+    private String CLIENT_SECRET;
     MemberDTO memberDTO = new MemberDTO();
 
 //    public static void main(String[] args) {
@@ -94,8 +103,10 @@ public class NaverService {
     public void getAccessToken(String code) {
         String reqUrl = "https://nid.naver.com/oauth2.0/token";
         String reqParam = "grant_type=authorization_code";
-        reqParam += "&client_id=p3ROwzA2JVE8fm6AJHhi";
-        reqParam += "&client_secret=1JKnW9W0wf";
+        // reqParam += "&client_id=p3ROwzA2JVE8fm6AJHhi";
+        reqParam += "&client_id="+CLIENT_ID;
+        // reqParam += "&client_secret=1JKnW9W0wf";
+        reqParam += "&client_secret="+CLIENT_SECRET;
         reqParam += "&code="+code;
 
         try {

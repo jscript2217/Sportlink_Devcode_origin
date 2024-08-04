@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedWriter;
@@ -21,13 +22,22 @@ public class KakaoService {
     @Autowired private MemberRepository memberRepository;
     @Autowired private MemberService memberService;
     private String accessToken;
+
+    @Value("${api.keys.kakao_client_id}")
+    private String CLIENT_ID;
+
+    @Value("${api.keys.kakao_redirect_uri}")
+    private String REDIRECT_URI;
+
     MemberDTO memberDTO = new MemberDTO();
 
     public void getAccessToken(String code) {
         String reqUrl = "https://kauth.kakao.com/oauth/token";
         String reqParam = "grant_type=authorization_code";
-        reqParam += "&client_id=d08e141ab68de7d1967abb180fd6727f";
-        reqParam += "&redirect_uri=http://localhost:8080/KakaoLogin";
+        // reqParam += "&client_id=d08e141ab68de7d1967abb180fd6727f";
+        reqParam += "&client_id="+CLIENT_ID;
+        // reqParam += "&redirect_uri=http://localhost:8080/KakaoLogin";
+        reqParam += "&redirect_uri="+REDIRECT_URI;
         reqParam += "&code="+code;
 
         try {
