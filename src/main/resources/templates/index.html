@@ -9,10 +9,6 @@
   <meta content="" name="description">
   <meta content="" name="keywords">
 
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,36 +23,36 @@
 
   <!-- Template Main CSS File -->
   <link href="/assets/css/common/index.css" rel="stylesheet">
-  <!-- Script to load header -->
-  <script src="/assets/js/common/header.js"></script>
-  <script src="/assets/js/common/footer.js"></script>
+
   <!-- 카카오 api 스크립트  -->
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5846dfc7f744d84867dbabc481ca99d5&libraries=services"></script>
 </head>
 <body>
 
-  <!-- ======= Header ======= -->
-  <div th:replace="layout/header :: header"></div>
-  <!-- End Header -->
+<!-- ======= Header ======= -->
+<div th:replace="layout/header :: header"></div>
+<!-- End Header -->
 <!-- [ 로그인 성공 알림창 ] -->
-  <th:block th:if="${msg == '로그인 성공' || msg == '회원가입 성공' || msg == '접근권한이 없습니다.'}">
-    <script>
-      top.alert("[[${msg}]]");
-    </script>
-  </th:block>
+<th:block th:if="${msg == '로그인 성공' || msg == '회원가입 성공' || msg == '접근권한이 없습니다.'}">
+  <script>
+    top.alert("[[${msg}]]");
+  </script>
+</th:block>
 <!-- ======= Hero Section ======= -->
 <section id="hero" class="hero d-flex align-items-center section-bg">
   <div class="container">
     <div class="row justify-content-between gy-5">
       <div class="col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start">
-<!--        <h2 data-aos="fade-up">SportLink<br>함께 할수록 <br> 더 저렴한 운동 플랫폼</h2>-->
-        <h2 data-aos="fade-up">SportLink<br>더 저렴하게 <br> 모든 스포츠를 연결하다</h2>
+        <h2 data-aos="fade-up" style="color:#002366">&nbsp;&nbsp;&nbsp;&nbsp;SportLink</h2>
+        <h2 data-aos="fade-up" style="color:#black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;희망&nbsp; 도전</h2>
+        <br>
         <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
-          <a th:href="@{/ticket}" class="btn-go">관람티켓</a>
+          <a th:href="@{/ticket}" class="btn-go">경기관람</a>
           <a th:href="@{/activity}" class="btn-go">시설할인</a>
         </div>
       </div>
       <div class="col-lg-5 order-1 order-lg-2 text-center text-lg-start">
-        <img src="/assets/img/KakaoTalk_20240801_145706188.png" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="300" width="300" height="200">
+        <img src="/assets/img/Untitled__19_-removebg-preview.png" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="300" width="300" height="200">
       </div>
     </div>
   </div>
@@ -64,53 +60,78 @@
 
 
 <!-- ======= Deals Section ======= -->
-      <section id="events" class="events">
-        <div class="container-fluid" data-aos="fade-up">
-          <div class="section-header">
-            <h2>Deals</h2>
-            <p>지금 가장 저렴한 특가상품</p>
-          </div>
-  
-          <div class="slides-3 swiper" data-aos="fade-up" data-aos-delay="100">
-            <div class="swiper-wrapper">
-  
-              <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(/assets/img/events-1.jpg)">
-                <h3>KBO LEAGUE</h3>
-                <div class="price align-self-start">55,000 ~ </div>
-                <p class="description">
-                  <a th:href="@{'/product/ticket_inner/26'}" style="color: white;">그 누구보다 빠르게 예매하는 KBO 리그</a>
-                </p>
-              </div><!-- End Event item -->
-  
-              <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(/assets/img/events-2.jpg)">
-                <h3>V-LEAGUE</h3>
-                <div class="price align-self-start">100,000 ~ </div>
-                <p class="description">
-                  <a th:href="@{'/product/ticket_inner/29'}" style="color: white;">월드 클래스, 김연경 선수와 함께</a>
-                </p>
-              </div><!-- End Event item -->
-  
-              <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(/assets/img/events-3.jpg)">
-                <h3>K-LEAGUE</h3>
-                <div class="price align-self-start">80,000 ~ </div>
-                <p class="description">
-                  <a th:href="@{'/product/ticket_inner/23'}" style="color: white;">K 리그 유소년 최강자를 가린다!</a>
-                </p>
-              </div>
-          </div>
-          </div>
-        </div>
-      </section>
+<section id="events" class="events">
+  <div class="container-fluid" data-aos="fade-up">
+    <div class="section-header">
+      <p>회원 전용 특가 예매</p>
+    </div>
+
+    <div class="slides-3 swiper" data-aos="fade-up" data-aos-delay="100">
+      <div class="swiper-wrapper">
+
+        <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(/assets/img/events-1.0.webp)">
+          <h3>KBO LEAGUE</h3>
+          <div class="price align-self-start">10,000 ~ </div>
+          <p class="description">
+            <a th:href="@{'/product/ticket_inner/26'}" style="color: white;">KBO 리그, 우리 모두의 꿈의 무대!</a>
+          </p>
+        </div><!-- End Event item -->
+
+        <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(/assets/img/events-2.0.jpg)">
+          <h3>V-LEAGUE</h3>
+          <div class="price align-self-start">12,000 ~ </div>
+          <p class="description">
+            <a th:href="@{'/product/ticket_inner/29'}" style="color: white;">스파이크의 짜릿함, 배구에서 느껴봐요!</a>
+          </p>
+        </div><!-- End Event item -->
+
+        <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(/assets/img/events-3.0.webp)">
+          <h3>K-LEAGUE</h3>
+          <div class="price align-self-start">14,000 ~ </div>
+          <p class="description">
+            <a th:href="@{'/product/ticket_inner/23'}" style="color: white;">90분의 드라마, 축구의 매력!</a>
+          </p>
+        </div><!-- End Event item -->
+
+        <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(/assets/img/LOL-1.jpg)">
+          <h3>League of Legends</h3>
+          <div class="price align-self-start">16,000 ~ </div>
+          <p class="description">
+            <a th:href="@{'/product/ticket_inner/35'}" style="color: white;">최고를 향한 도전, 롤드컵에서!</a>
+          </p>
+        </div><!-- End Event item -->
+
+        <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(/assets/img/KBL-1.jpg)">
+          <h3>KBL</h3>
+          <div class="price align-self-start">18,000 ~ </div>
+          <p class="description">
+            <a th:href="@{'/product/ticket_inner/32'}" style="color: white;">오른손은 거들뿐!</a>
+          </p>
+        </div><!-- End Event item -->
+
+        <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(/assets/img/UFC-1.0.jpg)">
+          <h3>UFC</h3>
+          <div class="price align-self-start">20,000 ~ </div>
+          <p class="description">
+            <a th:href="@{'/product/ticket_inner/38'}" style="color: white;">한계는 없다, 오직 도전만이 있을 뿐!</a>
+          </p>
+        </div><!-- End Event item -->
+
+      </div><!-- End Swiper Wrapper -->
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>
+</section>
 
 
 <!-- ======= season Section ======= -->
-<section id="season" class="season d-flex align-items-center" style="background-image: url('/assets/img/surfer5.jpg');">
+<section id="season" class="season d-flex align-items-center" style="background-image: url('/assets/img/54321.jpg');">
   <div class="container">
     <div class="row justify-content-between gy-5">
       <div class="col-lg-5 order-2 order-lg-2 text-right text-lg-end">
         <!-- 오른쪽 열에 배치될 텍스트 -->
         <div data-aos="fade-up">
-          <h2>다가오는 여름<br>시원한 수상 스포츠와 <br>함께</h2>
+          <h2 style="color: white">모래<br>그리고 열정</h2>
           <div class="d-flex justify-content-end" data-aos="fade-up" data-aos-delay="200">
             <a th:href="@{/activity}" class="btn-sgo">특가 확인</a>
           </div>
@@ -124,110 +145,92 @@
 
 
 <!-- ======= Map API ======= -->
-    <section id="contact" class="contact">
-      <div class="container">
+<section id="contact" class="contact">
+  <div class="container">
 
-        <div class="section-header">
-          <p>내 주변 할인 지도</p>
-        </div>
+    <div class="section-header">
+      <p>내 주변 할인 지도</p>
+    </div>
 
-        <div class="mb-3">
-          <div id="map" style="width: 100%; height: 400px;">
-        </div><!-- End KAKAO Maps -->
+    <div class="mb-3">
+      <div id="map" style="width: 70%; height: 500px; margin: 0 auto;">
+      </div><!-- End KAKAO Maps -->
+    </div>
 
-      </div>
-    </section>
+  </div>
+</section>
 
-    <!-- ======= Footer ======= -->
-  <div th:replace="layout/footer :: footer"></div>
+<!-- ======= Footer ======= -->
+<div th:replace="layout/footer :: footer"></div>
 
-<!--    &lt;!&ndash; Script to load header &ndash;&gt;-->
-<!--    <script src="/assets/js/common/header.js"></script>-->
-<!--    <script src="/assets/js/common/footer.js"></script>-->
-  
-  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-  
-  <div id="preloader"></div>
-  
-  <!-- Vendor JS Files -->
-  <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="/assets/vendor/aos/aos.js"></script>
-  <script src="/assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="/assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
-  
-  <!-- Template Main JS File -->
-  <script src="/assets/js/common/main.js"></script>
 
-  <script th:inline="javascript">
-    /*<![CDATA[*/
-    var products = /*[[${products}]]*/ []; // Thymeleaf를 사용하여 제품 목록을 가져옴
+<a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-    // 카카오 지도 API를 동적으로 로드
-    function loadKakaoMap() {
-        var script = document.createElement('script');
-        script.src = 'https://dapi.kakao.com/v2/maps/sdk.js?appkey=5846dfc7f744d84867dbabc481ca99d5&autoload=false&libraries=services';
-        script.async = true;
-        script.onload = function() {
-            kakao.maps.load(initMap); // 카카오 맵 API 로드 후 initMap 함수 호출
+<div id="preloader"></div>
+
+<!-- Vendor JS Files -->
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/aos/aos.js"></script>
+<script src="/assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+<script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+<!-- Template Main JS File -->
+<script src="/assets/js/common/main.js"></script>
+
+<script th:inline="javascript">
+  /*<![CDATA[*/
+  var products = /*[[${products}]]*/ []; // Thymeleaf를 사용하여 제품 목록을 가져옴
+
+  // 각 제품의 위치에 마커를 표시하는 함수
+  function displayMarkers(map, products) {
+    for (var i = 0; i < products.length; i++) {
+      var product = products[i];
+      var latLng = new kakao.maps.LatLng(product.latitude, product.longitude); // 제품의 위도와 경도
+
+      // 마커를 생성하고 지도에 표시
+      var marker = new kakao.maps.Marker({
+        position: latLng, // 마커의 위치
+        map: map // 마커가 표시될 지도
+      });
+
+      // 마커에 클릭 이벤트 등록
+      kakao.maps.event.addListener(marker, 'click', (function(marker, product) {
+        return function() {
+          var infowindow = new kakao.maps.InfoWindow({
+            content: '<a href="/ticket/go_ticket/' + encodeURIComponent(product.title) + '" style="padding:5px;font-size:12px;">' + product.title + '</a>',
+            removable: true
+          });
+          infowindow.open(map, marker);
         };
-        document.head.appendChild(script);
+      })(marker, product));
+
+      console.log("제품", i+1, "위도:", product.latitude, ", 경도:", product.longitude);
     }
+  }
 
-    // 지도를 생성하고 제품의 위치에 마커 표시
-    function initMap() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                var lat = position.coords.latitude; // 현재 위치의 위도
-                var lng = position.coords.longitude; // 현재 위치의 경도
+  // 지도를 생성하고 제품의 위치에 마커 표시
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var lat = position.coords.latitude; // 현재 위치의 위도
+      var lng = position.coords.longitude; // 현재 위치의 경도
 
-                var mapContainer = document.getElementById('map'); // 지도를 표시할 div
-                var mapOption = {
-                    center: new kakao.maps.LatLng(lat, lng), // 현재 위치를 중심으로 설정
-                    level: 5 // 지도의 확대 레벨
-                };
+      var mapContainer = document.getElementById('map'); // 지도를 표시할 div
+      var mapOption = {
+        center: new kakao.maps.LatLng(lat, lng), // 현재 위치를 중심으로 설정
+        level: 5 // 지도의 확대 레벨
+      };
 
-                // 지도를 생성
-                var map = new kakao.maps.Map(mapContainer, mapOption);
+      // 지도를 생성
+      var map = new kakao.maps.Map(mapContainer, mapOption);
 
-                // 각 제품의 위치에 마커 표시
-                displayMarkers(map, products);
-            });
-        } else {
-            alert('Geolocation이 지원되지 않는 브라우저입니다');
-        }
-    }
-
-    // 각 제품의 위치에 마커를 표시하는 함수
-    function displayMarkers(map, products) {
-        for (var i = 0; i < products.length; i++) {
-            var product = products[i];
-            var latLng = new kakao.maps.LatLng(product.latitude, product.longitude); // 제품의 위도와 경도
-
-            // 마커를 생성하고 지도에 표시
-            var marker = new kakao.maps.Marker({
-                position: latLng, // 마커의 위치
-                map: map // 마커가 표시될 지도
-            });
-
-            // 마커에 클릭 이벤트 등록
-            kakao.maps.event.addListener(marker, 'click', (function(marker, product) {
-                return function() {
-                    var infowindow = new kakao.maps.InfoWindow({
-                        content: '<a href="/ticket/go_ticket/' + encodeURIComponent(product.title) + '" style="padding:5px;font-size:12px;">' + product.title + '</a>',
-                        removable: true
-                    });
-                    infowindow.open(map, marker);
-                };
-            })(marker, product));
-
-            console.log("제품", i+1, "위도:", product.latitude, ", 경도:", product.longitude);
-        }
-    }
-
-    // 카카오 지도 API 로드
-    loadKakaoMap();
-    /*]]>*/
-  </script>
-  </body>
-  </html>
+      // 각 제품의 위치에 마커 표시
+      displayMarkers(map, products);
+    });
+  } else {
+    alert('Geolocation이 지원되지 않는 브라우저입니다');
+  }
+  /*]]>*/
+</script>
+</body>
+</html>

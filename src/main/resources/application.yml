@@ -2,9 +2,9 @@ server:
   port: 8080
   servlet:
     session:
-      tracking-modes: cookie
+      tracking-modes: cookie # URL에 JSessionID가 표시되지 않도록 설정
       cookie:
-        http-only: true
+        http-only: true # JSessionID 쿠키가 JavaScript에서 접근되지 않도록 설정(XSS 공격으로부터 보호)
         secure: true
 
 # database 연동 설정
