@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpSession;
-import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,10 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -34,80 +31,10 @@ public class NaverService {
     private String CLIENT_SECRET;
     MemberDTO memberDTO = new MemberDTO();
 
-    // public static void main(String[] args) {
-    // String token = "YOUR_ACCESS_TOKEN"; // 네이버 로그인 접근 토큰;
-    // String header = "Bearer " + token; // Bearer 다음에 공백 추가
-    //
-    // String apiURL = "https://openapi.naver.com/v1/nid/me";
-    //
-    // Map<String, String> requestHeaders = new HashMap<>();
-    // requestHeaders.put("Authorization", header);
-    // String responseBody = get(apiURL,requestHeaders);
-    //
-    // System.out.println(responseBody);
-    // }
-    //
-    //
-    // private static String get(String apiUrl, Map<String, String> requestHeaders){
-    // HttpURLConnection con = connect(apiUrl);
-    // try {
-    // con.setRequestMethod("GET");
-    // for(Map.Entry<String, String> header :requestHeaders.entrySet()) {
-    // con.setRequestProperty(header.getKey(), header.getValue());
-    // }
-    //
-    //
-    // int responseCode = con.getResponseCode();
-    // if (responseCode == HttpURLConnection.HTTP_OK) { // 정상 호출
-    // return readBody(con.getInputStream());
-    // } else { // 에러 발생
-    // return readBody(con.getErrorStream());
-    // }
-    // } catch (IOException e) {
-    // throw new RuntimeException("API 요청과 응답 실패", e);
-    // } finally {
-    // con.disconnect();
-    // }
-    // }
-    //
-    //
-    // private static HttpURLConnection connect(String apiUrl){
-    // try {
-    // URL url = new URL(apiUrl);
-    // return (HttpURLConnection)url.openConnection();
-    // } catch (MalformedURLException e) {
-    // throw new RuntimeException("API URL이 잘못되었습니다. : " + apiUrl, e);
-    // } catch (IOException e) {
-    // throw new RuntimeException("연결이 실패했습니다. : " + apiUrl, e);
-    // }
-    // }
-    //
-    //
-    // private static String readBody(InputStream body){
-    // InputStreamReader streamReader = new InputStreamReader(body);
-    //
-    //
-    // try (BufferedReader lineReader = new BufferedReader(streamReader)) {
-    // StringBuilder responseBody = new StringBuilder();
-    //
-    //
-    // String line;
-    // while ((line = lineReader.readLine()) != null) {
-    // responseBody.append(line);
-    // }
-    //
-    //
-    // return responseBody.toString();
-    // } catch (IOException e) {
-    // throw new RuntimeException("API 응답을 읽는데 실패했습니다.", e);
-    // }
-    // }
     public void getAccessToken(String code) {
         String reqUrl = "https://nid.naver.com/oauth2.0/token";
         String reqParam = "grant_type=authorization_code";
-        // reqParam += "&client_id=p3ROwzA2JVE8fm6AJHhi";
         reqParam += "&client_id=" + CLIENT_ID;
-        // reqParam += "&client_secret=1JKnW9W0wf";
         reqParam += "&client_secret=" + CLIENT_SECRET;
         reqParam += "&code=" + code;
 

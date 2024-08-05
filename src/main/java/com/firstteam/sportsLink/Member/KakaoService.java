@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class KakaoService {
     @Autowired
     private MemberRepository memberRepository;
@@ -36,10 +39,12 @@ public class KakaoService {
     public void getAccessToken(String code) {
         String reqUrl = "https://kauth.kakao.com/oauth/token";
         String reqParam = "grant_type=authorization_code";
-        // reqParam += "&client_id=d08e141ab68de7d1967abb180fd6727f";
         reqParam += "&client_id=" + CLIENT_ID;
-        // reqParam += "&redirect_uri=http://localhost:8080/KakaoLogin";
+        log.info("현재 카카오 CLIENT_ID : " + CLIENT_ID);
+
         reqParam += "&redirect_uri=" + REDIRECT_URI;
+        log.info("REDIRECT URI : " + REDIRECT_URI);
+
         reqParam += "&code=" + code;
 
         try {
