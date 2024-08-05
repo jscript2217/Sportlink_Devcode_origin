@@ -17,7 +17,7 @@ public class S3Service {
         @Autowired
         private AmazonS3 amazonS3;
 
-        @Value("${spring.cloud.aws.s3.bucket}")
+        @Value("${S3_BUCKET}")
         private String bucketName;
 
         public String uploadFile(MultipartFile file) throws IOException {
