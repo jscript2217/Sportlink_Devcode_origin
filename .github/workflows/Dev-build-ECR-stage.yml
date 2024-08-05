@@ -139,7 +139,7 @@ jobs:
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}  # 시크릿으로 변경
-        IMAGE_TAG: ${{ steps.tag-image.outputs.version }}
+        IMAGE_TAG: ${{ steps.tag-image.outputs.version }}-stage #-stage 태그 추가
       run: |
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
@@ -147,7 +147,7 @@ jobs:
         echo "::set-output name=tag-image::$IMAGE_TAG"
 
     outputs:
-      image_tag: ${{ steps.tag-image.outputs.version }}
+      image_tag: ${{ steps.tag-image.outputs.version }}-stage
       sha: ${{ github.sha }}
 
   deploy:
@@ -155,7 +155,7 @@ jobs:
     name: Helm Chart Update
     runs-on: ubuntu-latest
     env:
-      IMAGE_TAG: ${{ needs.build.outputs.image_tag }}-stage       #ecr 저장소에 태그 "-stage" 추가
+      IMAGE_TAG: ${{ needs.build.outputs.image_tag }}
       GIT_ACCESS_TOKEN: ${{ secrets.GIT_HUB_TOKEN }}
       HASH: ${{ needs.build.outputs.sha }}
       GIT_REPO: ${{ secrets.GIT_REPO }}  # 시크릿으로 변경
