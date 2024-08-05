@@ -1,7 +1,7 @@
 package com.firstteam.sportsLink.Member;
 
-import com.firstteam.sportsLink.qna.PageRequestDTO;
-import com.firstteam.sportsLink.qna.QnaDTO;
+import com.firstteam.sportsLink.Qna.PageRequestDTO;
+import com.firstteam.sportsLink.Qna.QnaDTO;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.beans.factory.annotation.Autowired;
