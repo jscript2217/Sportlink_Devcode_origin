@@ -55,7 +55,7 @@ spring:
         max-request-size: 10MB=
 api:
   keys:
-    kakao_client_id: ${kakao_client_id}
-    kakao_redirect_uri: ${kakao_redirect_uri}
-    naver_client_id: ${naver_client_id}
-    naver_client_secret: ${naver_client_secret}
+    kakao_client_id: d08e141ab68de7d1967abb180fd6727f
+    kakao_redirect_uri: https://eeeni.store/KakaoLogin
+    naver_client_id: p3ROwzA2JVE8fm6AJHhi
+    naver_client_secret: 1JKnW9W0wf
