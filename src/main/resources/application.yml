@@ -1,5 +1,11 @@
 server:
   port: 8080
+  servlet:
+    session:
+      tracking-modes: cookie
+      cookie:
+        http-only: true
+        secure: true
 
 # database 연동 설정
 spring:
