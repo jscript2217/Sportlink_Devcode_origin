@@ -13,22 +13,21 @@ import java.util.UUID;
 
 @Service
 public class S3Service {
+    @Autowired
+    private AmazonS3 amazonS3;
 
-        @Autowired
-        private AmazonS3 amazonS3;
+    @Value("${spring.cloud.aws.s3.bucket}")
+    private String bucketName;
 
-        @Value("${S3_BUCKET}")
-        private String bucketName;
+    public String uploadFile(MultipartFile file) throws IOException {
+        String fileName = generateFileName(file);
+        ObjectMetadata metadata = new ObjectMetadata();
+        metadata.setContentLength(file.getSize());
+        amazonS3.putObject(new PutObjectRequest(bucketName, fileName, file.getInputStream(), metadata));
+        return fileName;
+    }
 
-        public String uploadFile(MultipartFile file) throws IOException {
-            String fileName = generateFileName(file);
-            ObjectMetadata metadata = new ObjectMetadata();
-            metadata.setContentLength(file.getSize());
-            amazonS3.putObject(new PutObjectRequest(bucketName, fileName, file.getInputStream(), metadata));
-            return fileName;
-        }
-
-        private String generateFileName(MultipartFile file) {
-            return UUID.randomUUID().toString() + "-" + file.getOriginalFilename();
-        }
+    private String generateFileName(MultipartFile file) {
+        return UUID.randomUUID().toString() + "-" + file.getOriginalFilename();
+    }
 }

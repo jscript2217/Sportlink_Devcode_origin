@@ -36,6 +36,9 @@ spring:
 
   cloud:
     aws:
+      credentials:
+        accessKey: ${AWS_ACCESS_KEY_ID}
+        secretKey: ${AWS_SECRET_ACCESS_KEY}
       region:
         static: ap-northeast-2 # 사용할 AWS 리전
       stack:
