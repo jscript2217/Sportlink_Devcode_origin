@@ -34,17 +34,27 @@ spring:
     suffix: .html
     cache: false
 
+#  cloud:
+#    aws:
+#      credentials:
+#        accessKey: ${AWS_ACCESS_KEY_ID}
+#        secretKey: ${AWS_SECRET_ACCESS_KEY}
+#      region:
+#        static: ap-northeast-2 # 사용할 AWS 리전
+#      stack:
+#        auto: false
+#      s3:
+#        bucket: ${S3_BUCKET}
+
   cloud:
     aws:
+      s3:
+        bucket: ${S3_BUCKET}
+      stack.auto: false
+      region.static: ap-northeast-2
       credentials:
         accessKey: ${AWS_ACCESS_KEY_ID}
         secretKey: ${AWS_SECRET_ACCESS_KEY}
-      region:
-        static: ap-northeast-2 # 사용할 AWS 리전
-      stack:
-        auto: false
-      s3:
-        bucket: ${S3_BUCKET}
   ##key추가
   file:
     upload:
@@ -55,4 +65,4 @@ spring:
     servlet:
       multipart:
         max-file-size: 10MB
-        max-request-size: 10MB=
+        max-request-size: 10MB
