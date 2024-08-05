@@ -53,9 +53,3 @@ spring:
       multipart:
         max-file-size: 10MB
         max-request-size: 10MB=
-api:
-  keys:
-    kakao_client_id: d08e141ab68de7d1967abb180fd6727f
-    kakao_redirect_uri: https://eeeni.store/KakaoLogin
-    naver_client_id: p3ROwzA2JVE8fm6AJHhi
-    naver_client_secret: 1JKnW9W0wf
