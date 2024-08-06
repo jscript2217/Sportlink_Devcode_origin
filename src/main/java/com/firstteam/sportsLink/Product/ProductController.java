@@ -1,6 +1,7 @@
  package com.firstteam.sportsLink.Product;
 
  import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.beans.factory.annotation.Value;
  import org.springframework.data.domain.Page;
  import org.springframework.stereotype.Controller;
  import org.springframework.ui.Model;
@@ -19,6 +20,9 @@
  public class ProductController {
      @Autowired
      private S3Service s3Service;
+
+     @Value("${spring.cloud.aws.s3.bucket}")
+     private String bucketName;
 
      @Autowired
      private ProductService productService;
@@ -46,6 +50,7 @@
              if (!file.isEmpty()) {
                  String imageUrl = s3Service.uploadFile(file);
                  productDTO.setImageUrl(imageUrl);
+                 productDTO.setS3bucket(bucketName);
              }
              ProductEntity product = productDTO.toEntity();
              productService.saveProduct(product);
@@ -62,6 +67,7 @@
              if (!file.isEmpty()) {
                  String imageUrl = s3Service.uploadFile(file);
                  productDTO.setImageUrl(imageUrl);
+                 productDTO.setS3bucket(bucketName);
              }
              ProductEntity product = productDTO.toEntity();
              productService.saveProduct(product);
@@ -176,6 +182,7 @@
                  Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING); // 파일 복사
                  imageUrl = "/image/" + fileName;
                  product.setImageUrl(imageUrl);
+                 product.setS3bucket(bucketName);
              } catch (IOException e) {
                  e.printStackTrace();
                  // 파일 업로드에 실패한 경우 예외 처리

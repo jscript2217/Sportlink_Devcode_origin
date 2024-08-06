@@ -16,10 +16,10 @@ public class ProductDTO {
     private String category;
     private String description;
     private String imageUrl;
+    private String s3bucket;
     private String producttype;
     private Double latitude;
     private Double longitude;
-
     // Getters and setters
 
     public ProductEntity toEntity() {
@@ -31,6 +31,7 @@ public class ProductDTO {
         product.setCategory(this.category);
         product.setDescription(this.description);
         product.setImageUrl(this.imageUrl);
+        product.setS3bucket(this.s3bucket);
         product.setLatitude(this.latitude);
         product.setLongitude(this.longitude);
         product.setProducttype(this.producttype);
