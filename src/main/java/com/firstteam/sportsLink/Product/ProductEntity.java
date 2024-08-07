@@ -24,6 +24,7 @@ public class ProductEntity {
     private String category;
     private String description;
     private String imageUrl;
+    private String s3bucket;
     private String producttype;
     private Double latitude;
     private Double longitude;

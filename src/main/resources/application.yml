@@ -10,7 +10,7 @@ server:
 # database 연동 설정
 spring:
   datasource:
-    url: jdbc:mysql://${DB_HOST}:3306/${DB_NAME}
+    url: jdbc:mysql://${DB_HOST}/${DB_NAME}
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
 
@@ -34,14 +34,27 @@ spring:
     suffix: .html
     cache: false
 
+#  cloud:
+#    aws:
+#      credentials:
+#        accessKey: ${AWS_ACCESS_KEY_ID}
+#        secretKey: ${AWS_SECRET_ACCESS_KEY}
+#      region:
+#        static: ap-northeast-2 # 사용할 AWS 리전
+#      stack:
+#        auto: false
+#      s3:
+#        bucket: ${S3_BUCKET}
+
   cloud:
     aws:
-      region:
-        static: ap-northeast-2 # 사용할 AWS 리전
-      stack:
-        auto: false
       s3:
         bucket: ${S3_BUCKET}
+      stack.auto: false
+      region.static: ap-northeast-2
+      credentials:
+        accessKey: ${AWS_ACCESS_KEY_ID}
+        secretKey: ${AWS_SECRET_ACCESS_KEY}
   ##key추가
   file:
     upload:
@@ -52,10 +65,4 @@ spring:
     servlet:
       multipart:
         max-file-size: 10MB
-        max-request-size: 10MB=
-api:
-  keys:
-    kakao_client_id: ${kakao_client_id}
-    kakao_redirect_uri: ${kakao_redirect_uri}
-    naver_client_id: ${naver_client_id}
-    naver_client_secret: ${naver_client_secret}
+        max-request-size: 10MB
