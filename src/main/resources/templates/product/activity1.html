@@ -2,68 +2,68 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>SportLink - Inner</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+    <title>SportLink - Inner</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
-  <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="/assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
     <!-- 카카오 api 스크립트  -->
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5846dfc7f744d84867dbabc481ca99d5"></script>
-  <!-- Template CSS File -->
-  <link href="/assets/css/ticket/ticket.css" rel="stylesheet">
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5846dfc7f744d84867dbabc481ca99d5"></script>
+    <!-- Template CSS File -->
+    <link href="/assets/css/ticket/ticket.css" rel="stylesheet">
 </head>
 
 <body>
 
-  <!-- ======= Header ======= -->
-  <div th:replace="layout/header :: header"></div>
-  <!-- End Header -->
+<!-- ======= Header ======= -->
+<div th:replace="layout/header :: header"></div>
+<!-- End Header -->
 
 <!-- ======= filter ======= -->
 <div id="filter-container" class="container py-4">
     <section id="filter-section" class="filter-bar row justify-content-center align-items-center">
-      <!-- 지역 필터링 -->
-      <div class="filter col-md-3 mb-3 mb-md-0">
-        <label for="location-filter" class="d-block text-center">지역</label>
-        <select id="location-filter" class="form-select w-100">
-            <option value="all">전체</option>
-          <option value="seoul">서울</option>
-          <option value="gyeonggi">경기</option>
-          <option value="incheon">인천</option>
-          <option value="gangwon">강원</option>
-          <option value="chungcheong">충청</option>
-          <option value="gyeongsang">경상</option>
-          <option value="jeolla">전라</option>
-          <option value="jeju">제주</option>
-        </select>
-      </div>
-  
-      <!-- 종목 필터링 -->
-      <div class="filter col-md-3 mb-3 mb-md-0">
-        <label for="category-filter" class="d-block text-center">종목</label>
-        <select id="category-filter" class="form-select w-100">
-            <option value="all">전체</option>
-            <option value="Gym">헬스</option>
-            <option value="Ski">스키</option>
-            <option value="Golf">골프</option>
-            <option value="Soccer">축구</option>
-            <option value="waterLeisure">수상레저</option>
-        </select>
-      </div>
-  
-      <!-- 날짜 필터링 -->
+        <!-- 지역 필터링 -->
+        <div class="filter col-md-3 mb-3 mb-md-0">
+            <label for="location-filter" class="d-block text-center">지역</label>
+            <select id="location-filter" class="form-select w-100">
+                <option value="all">전체</option>
+                <option value="seoul">서울</option>
+                <option value="gyeonggi">경기</option>
+                <option value="incheon">인천</option>
+                <option value="gangwon">강원</option>
+                <option value="chungcheong">충청</option>
+                <option value="gyeongsang">경상</option>
+                <option value="jeolla">전라</option>
+                <option value="jeju">제주</option>
+            </select>
+        </div>
+
+        <!-- 종목 필터링 -->
+        <div class="filter col-md-3 mb-3 mb-md-0">
+            <label for="category-filter" class="d-block text-center">종목</label>
+            <select id="category-filter" class="form-select w-100">
+                <option value="all">전체</option>
+                <option value="Gym">헬스</option>
+                <option value="Ski">스키</option>
+                <option value="Golf">골프</option>
+                <option value="Soccer">축구</option>
+                <option value="waterLeisure">수상레저</option>
+            </select>
+        </div>
+
+        <!-- 날짜 필터링 -->
         <div class="filter col-md-3 mb-3 mb-md-0">
             <label for="sort-filter" class="d-block text-center">정렬</label>
             <select id="sort-filter" class="form-select w-100">
@@ -75,70 +75,70 @@
             </select>
         </div>
 
-  
-      <!-- 검색 버튼 -->
-      <div class="filter col-md-3">
-        <button id="apply-filter" class="search-button w-100">검색</button>
-          <a th:if="${session.role == 'admin'}" th:href="@{/product/activity_write}" class="search-button w-100">상품추가</a>
-      </div>
+
+        <!-- 검색 버튼 -->
+        <div class="filter col-md-3">
+            <button id="apply-filter" class="search-button w-100">검색</button>
+            <a th:if="${session.role == 'admin'}" th:href="@{/product/activity_write}" class="search-button w-100">상품추가</a>
+        </div>
     </section>
-  </div>
+</div>
 <!-- ======= Product Section ======= -->
-  <section class="product-section py-5">
-      <div class="container px-4 px-lg-5 mt-5">
-          <div class="row gx-3 gx-lg-4 row-cols-2 row-cols-md-4 row-cols-xl-5 justify-content-center" id="product-cards">
-              <!-- Product Cards will be dynamically inserted here -->
-          </div>
-          <!-- Pagination Controls -->
-          <div class="d-flex justify-content-center">
-              <nav>
-                  <ul class="pagination" id="pagination-controls">
-                      <!-- Pagination items will be dynamically inserted here -->
-                  </ul>
-              </nav>
-          </div>
-      </div>
-  </section>
+<section class="product-section py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-3 gx-lg-4 row-cols-2 row-cols-md-4 row-cols-xl-5 justify-content-center" id="product-cards">
+            <!-- Product Cards will be dynamically inserted here -->
+        </div>
+        <!-- Pagination Controls -->
+        <div class="d-flex justify-content-center">
+            <nav>
+                <ul class="pagination" id="pagination-controls">
+                    <!-- Pagination items will be dynamically inserted here -->
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
 
 
 
-  <!-- ======= Footer ======= -->
-  <div th:replace="layout/footer :: footer"></div>
+<!-- ======= Footer ======= -->
+<div th:replace="layout/footer :: footer"></div>
 
-  <!-- Script to load header -->
-  <script src="/assets/js/common/header.js"></script>
-  <script src="/assets/js/common/footer.js"></script>
+<!-- Script to load header -->
+<script src="/assets/js/common/header.js"></script>
+<script src="/assets/js/common/footer.js"></script>
 
 <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-  <script th:inline="javascript">
-      /*<![CDATA[*/
-      const products = /*[[${activity_ticket}]]*/ []; // 초기 데이터 로드
-      /*]]>*/
-  </script>
-  <script>
-      document.addEventListener('DOMContentLoaded', () => {
-          const itemsPerPage = 10;
-          let currentPage = 1;
-          let filteredProducts = products; // 전체 데이터를 유지
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    const products = /*[[${activity_ticket}]]*/ []; // 초기 데이터 로드
+    /*]]>*/
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const itemsPerPage = 10;
+        let currentPage = 1;
+        let filteredProducts = products; // 전체 데이터를 유지
 
-          function displayProducts(products, page) {
-              const start = (page - 1) * itemsPerPage;
-              const end = start + itemsPerPage;
-              const paginatedItems = products.slice(start, end);
+        function displayProducts(products, page) {
+            const start = (page - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const paginatedItems = products.slice(start, end);
 
-              const productCardsContainer = document.getElementById('product-cards');
-              productCardsContainer.innerHTML = '';
+            const productCardsContainer = document.getElementById('product-cards');
+            productCardsContainer.innerHTML = '';
 
-              paginatedItems.forEach(product => {
-                  const productCard = document.createElement('div');
-                  productCard.className = 'col mb-5 product-card';
-                  productCard.setAttribute('location', product.location);
-                  productCard.setAttribute('category', product.category);
+            paginatedItems.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'col mb-5 product-card';
+                productCard.setAttribute('location', product.location);
+                productCard.setAttribute('category', product.category);
 
-                  productCard.innerHTML = `
+                productCard.innerHTML = `
                       <div class="card h-100">
-                          <img class="card-img-top" src="https://sportlink-image.s3.ap-northeast-2.amazonaws.com/${product.imageUrl}" alt="Product Image" style="object-fit: cover; width: 100%; height: 200px;"/>
+                          <img class="card-img-top" src="https://${product.s3bucket}.s3.ap-northeast-2.amazonaws.com/${product.imageUrl}" alt="Product Image" style="object-fit: cover; width: 100%; height: 200px;"/>
                           <div class="card-body p-4 text-center">
                               <div class="text-center">
                                   <h5 class="fw-bolder">${product.title}</h5>
@@ -150,86 +150,86 @@
                           </div>
                       </div>
                   `;
-                  productCardsContainer.appendChild(productCard);
-              });
-          }
+                productCardsContainer.appendChild(productCard);
+            });
+        }
 
-          function setupPagination(products) {
-              const pageCount = Math.ceil(products.length / itemsPerPage);
-              const paginationControls = document.getElementById('pagination-controls');
-              paginationControls.innerHTML = '';
+        function setupPagination(products) {
+            const pageCount = Math.ceil(products.length / itemsPerPage);
+            const paginationControls = document.getElementById('pagination-controls');
+            paginationControls.innerHTML = '';
 
-              for (let i = 1; i <= pageCount; i++) {
-                  const pageItem = document.createElement('li');
-                  pageItem.className = `page-item ${i === currentPage ? 'active' : ''}`;
-                  pageItem.innerHTML = `<a class="page-link" href="#">${i}</a>`;
-                  pageItem.addEventListener('click', (e) => {
-                      e.preventDefault();
-                      currentPage = i;
-                      displayProducts(filteredProducts, currentPage); // 필터링된 데이터를 표시
-                      setupPagination(filteredProducts); // 필터링된 데이터에 대한 페이지네이션 설정
-                  });
-                  paginationControls.appendChild(pageItem);
-              }
-          }
+            for (let i = 1; i <= pageCount; i++) {
+                const pageItem = document.createElement('li');
+                pageItem.className = `page-item ${i === currentPage ? 'active' : ''}`;
+                pageItem.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+                pageItem.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    currentPage = i;
+                    displayProducts(filteredProducts, currentPage); // 필터링된 데이터를 표시
+                    setupPagination(filteredProducts); // 필터링된 데이터에 대한 페이지네이션 설정
+                });
+                paginationControls.appendChild(pageItem);
+            }
+        }
 
-          function applyFilters() {
-              const locationFilter = document.getElementById('location-filter').value;
-              const categoryFilter = document.getElementById('category-filter').value;
-              const sortFilter = document.getElementById('sort-filter').value;
+        function applyFilters() {
+            const locationFilter = document.getElementById('location-filter').value;
+            const categoryFilter = document.getElementById('category-filter').value;
+            const sortFilter = document.getElementById('sort-filter').value;
 
-              filteredProducts = products; // 전체 데이터에서 필터링 시작
+            filteredProducts = products; // 전체 데이터에서 필터링 시작
 
-              if (locationFilter !== 'all') {
-                  filteredProducts = filteredProducts.filter(product => product.location === locationFilter);
-              }
-              if (categoryFilter !== 'all') {
-                  filteredProducts = filteredProducts.filter(product => product.category === categoryFilter);
-              }
+            if (locationFilter !== 'all') {
+                filteredProducts = filteredProducts.filter(product => product.location === locationFilter);
+            }
+            if (categoryFilter !== 'all') {
+                filteredProducts = filteredProducts.filter(product => product.category === categoryFilter);
+            }
 
-              switch (sortFilter) {
-                  case 'price-asc':
-                      filteredProducts.sort((a, b) => a.price - b.price);
-                      break;
-                  case 'price-desc':
-                      filteredProducts.sort((a, b) => b.price - a.price);
-                      break;
-                  case 'date-asc':
-                      filteredProducts.sort((a, b) => new Date(a.endDate) - new Date(b.endDate));
-                      break;
-                  case 'date-desc':
-                      filteredProducts.sort((a, b) => new Date(b.endDate) - new Date(a.endDate));
-                      break;
-                  default:
-                      break;
-              }
+            switch (sortFilter) {
+                case 'price-asc':
+                    filteredProducts.sort((a, b) => a.price - b.price);
+                    break;
+                case 'price-desc':
+                    filteredProducts.sort((a, b) => b.price - a.price);
+                    break;
+                case 'date-asc':
+                    filteredProducts.sort((a, b) => new Date(a.endDate) - new Date(b.endDate));
+                    break;
+                case 'date-desc':
+                    filteredProducts.sort((a, b) => new Date(b.endDate) - new Date(a.endDate));
+                    break;
+                default:
+                    break;
+            }
 
-              currentPage = 1; // 필터 적용 시 페이지를 첫 페이지로 리셋
-              displayProducts(filteredProducts, currentPage);
-              setupPagination(filteredProducts);
-          }
+            currentPage = 1; // 필터 적용 시 페이지를 첫 페이지로 리셋
+            displayProducts(filteredProducts, currentPage);
+            setupPagination(filteredProducts);
+        }
 
-          document.getElementById('apply-filter').addEventListener('click', () => {
-              applyFilters();
-          });
+        document.getElementById('apply-filter').addEventListener('click', () => {
+            applyFilters();
+        });
 
-          displayProducts(products, currentPage);
-          setupPagination(products);
-      });
-  </script>
+        displayProducts(products, currentPage);
+        setupPagination(products);
+    });
+</script>
 
-  <div id="preloader"></div>
-  <!-- Vendor JS Files -->
-  <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="/assets/vendor/aos/aos.js"></script>
-  <script src="/assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="/assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
+<div id="preloader"></div>
+<!-- Vendor JS Files -->
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/aos/aos.js"></script>
+<script src="/assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+<script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
 
 <!-- Template Main JS File -->
 <script src="/assets/js/common/main.js"></script>
 
-   <!-- Custom JavaScript for Write Page -->
+<!-- Custom JavaScript for Write Page -->
 <script src="/assets/js/product/filter.js"></script>
 
 </body>

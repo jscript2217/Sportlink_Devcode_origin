@@ -1,6 +1,7 @@
 package com.firstteam.sportsLink.Product;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,9 @@ import java.util.List;
 public class ProductController {
     @Autowired
     private S3Service s3Service;
+
+    @Value("${spring.cloud.aws.s3.bucket}")
+    private String bucketName;
 
     @Autowired
     private ProductService productService;
@@ -46,6 +50,7 @@ public class ProductController {
             if (!file.isEmpty()) {
                 String imageUrl = s3Service.uploadFile(file);
                 productDTO.setImageUrl(imageUrl);
+                productDTO.setS3bucket(bucketName);
             }
             ProductEntity product = productDTO.toEntity();
             productService.saveProduct(product);
@@ -62,6 +67,7 @@ public class ProductController {
             if (!file.isEmpty()) {
                 String imageUrl = s3Service.uploadFile(file);
                 productDTO.setImageUrl(imageUrl);
+                productDTO.setS3bucket(bucketName);
             }
             ProductEntity product = productDTO.toEntity();
             productService.saveProduct(product);
@@ -72,40 +78,40 @@ public class ProductController {
         }
     }
 
-//    @PostMapping("/product/activity_write")
-//    public String createActivity(@ModelAttribute ProductDTO productDTO, @RequestParam("image") MultipartFile file) {
-//        if (!file.isEmpty()) {
-//            try {
-//                String fileName = StringUtils.cleanPath(file.getOriginalFilename()); // 파일명 정리
-//                Path uploadPath = Paths.get(uploadDirectory); // 업로드 디렉토리 경로
-//                Path filePath = uploadPath.resolve(fileName); // 파일 경로 설정
-//                Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING); // 파일 복사
-//
-//                // 파일 경로를 DTO에 설정
-//                productDTO.setImageUrl("/image/" + fileName);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//                // 파일 업로드에 실패한 경우 예외 처리
-//                return "redirect:ticket/ticket_write?uploadError";
-//            }
-//        }
-//        ProductEntity product = productDTO.toEntity();
-//        productService.saveProduct(product);
-//        return "redirect:/activity";
-//    }
+    //    @PostMapping("/product/activity_write")
+    //    public String createActivity(@ModelAttribute ProductDTO productDTO, @RequestParam("image") MultipartFile file) {
+    //        if (!file.isEmpty()) {
+    //            try {
+    //                String fileName = StringUtils.cleanPath(file.getOriginalFilename()); // 파일명 정리
+    //                Path uploadPath = Paths.get(uploadDirectory); // 업로드 디렉토리 경로
+    //                Path filePath = uploadPath.resolve(fileName); // 파일 경로 설정
+    //                Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING); // 파일 복사
+    //
+    //                // 파일 경로를 DTO에 설정
+    //                productDTO.setImageUrl("/image/" + fileName);
+    //            } catch (IOException e) {
+    //                e.printStackTrace();
+    //                // 파일 업로드에 실패한 경우 예외 처리
+    //                return "redirect:ticket/ticket_write?uploadError";
+    //            }
+    //        }
+    //        ProductEntity product = productDTO.toEntity();
+    //        productService.saveProduct(product);
+    //        return "redirect:/activity";
+    //    }
 
-// 백엔드에서 페이징 구현하려고 했지만,,, 필터가 해당 페이지만 적용되는 바람에 다시 만듬
-//    @GetMapping("/ticket")
-//    public String showViewTickets(
-//            @RequestParam(defaultValue = "0") int page,
-//            @RequestParam(defaultValue = "10") int size,
-//            Model model) {
-//        Page<ProductEntity> viewingTickets = productService.findViewingTickets(page, size);
-//        model.addAttribute("view_ticket", viewingTickets.getContent());
-//        model.addAttribute("currentPage", page);
-//        model.addAttribute("totalPages", viewingTickets.getTotalPages());
-//        return "product/ticket";
-//    }
+    // 백엔드에서 페이징 구현하려고 했지만,,, 필터가 해당 페이지만 적용되는 바람에 다시 만듬
+    //    @GetMapping("/ticket")
+    //    public String showViewTickets(
+    //            @RequestParam(defaultValue = "0") int page,
+    //            @RequestParam(defaultValue = "10") int size,
+    //            Model model) {
+    //        Page<ProductEntity> viewingTickets = productService.findViewingTickets(page, size);
+    //        model.addAttribute("view_ticket", viewingTickets.getContent());
+    //        model.addAttribute("currentPage", page);
+    //        model.addAttribute("totalPages", viewingTickets.getTotalPages());
+    //        return "product/ticket";
+    //    }
     @GetMapping("/ticket")
     public String showViewTickets(Model model) {
         List<ProductEntity> activityTickets = productService.findViewingTickets();
@@ -120,18 +126,18 @@ public class ProductController {
         return "product/activity1";
     }
 
-// 백엔드에서 페이징 구현하려고 했지만,,, 필터가 해당 페이지만 적용되는 바람에 다시 만듬
-//    @GetMapping("/activity")
-//    public String showActivity(
-//            @RequestParam(defaultValue = "0") int page,
-//            @RequestParam(defaultValue = "10") int size,
-//            Model model) {
-//        Page<ProductEntity> activityTickets = productService.findActivityTickets(page, size);
-//        model.addAttribute("activity_ticket", activityTickets.getContent());
-//        model.addAttribute("currentPage", page);
-//        model.addAttribute("totalPages", activityTickets.getTotalPages());
-//        return "product/activity1";
-//    }
+    // 백엔드에서 페이징 구현하려고 했지만,,, 필터가 해당 페이지만 적용되는 바람에 다시 만듬
+    //    @GetMapping("/activity")
+    //    public String showActivity(
+    //            @RequestParam(defaultValue = "0") int page,
+    //            @RequestParam(defaultValue = "10") int size,
+    //            Model model) {
+    //        Page<ProductEntity> activityTickets = productService.findActivityTickets(page, size);
+    //        model.addAttribute("activity_ticket", activityTickets.getContent());
+    //        model.addAttribute("currentPage", page);
+    //        model.addAttribute("totalPages", activityTickets.getTotalPages());
+    //        return "product/activity1";
+    //    }
     @GetMapping("/product/ticket_inner/{id}")
     public String showProductDetail(@PathVariable("id") Long id, Model model) {
         ProductEntity product = productService.findProductById(id);
@@ -176,6 +182,7 @@ public class ProductController {
                 Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING); // 파일 복사
                 imageUrl = "/image/" + fileName;
                 product.setImageUrl(imageUrl);
+                product.setS3bucket(bucketName);
             } catch (IOException e) {
                 e.printStackTrace();
                 // 파일 업로드에 실패한 경우 예외 처리

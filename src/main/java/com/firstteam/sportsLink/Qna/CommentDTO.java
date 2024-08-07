@@ -1,6 +1,4 @@
-package com.firstteam.sportsLink.qna;
-
-import jakarta.persistence.Entity;
+package com.firstteam.sportsLink.Qna;
 
 public class CommentDTO {
     private Long id;
